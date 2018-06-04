@@ -1,7 +1,9 @@
+# -*- coding: UTF-8 -*-
 from hdfs import *
 # connect hdfs
 def connect():
-    client = Client("http://192.168.1.105:50070")
+    #client = Client("http://192.168.168.228:50070",)
+    client = Client("http://192.168.168.228:50070",root="/",timeout=100,session=False)
     return client
 #将字典转化为类
 def dict2obj(args):

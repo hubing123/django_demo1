@@ -25,8 +25,8 @@ SECRET_KEY = 'sscj=ue9_8+n6*-0s%qtri(!ic3udw+f*)g&c0!#ma#7n@emf4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = "*"
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'online',
+    'save',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR,'online/templates'),
+                 os.path.join(BASE_DIR,'save/templates'),
                  ]
         ,
         'APP_DIRS': True,
@@ -105,18 +107,52 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format': '[%(asctime)s] [%(levelname)s] %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'console':{
+#             'level':'INFO',
+#             'class':'logging.StreamHandler',
+#             'formatter': 'verbose'
+#         },
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': 'D:/monitor.log',
+#             'formatter': 'verbose'
+#         },
+#         'email': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#             'include_html' : True,
+#         }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console', 'file', 'email'],
+#             'level': 'INFO',
+#             'propagate': True,
+#         },
+#     },
+# }
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

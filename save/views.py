@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -132,7 +134,13 @@ def more(request,username,path):
 def delete(request,username,path):
     new_path = "/".join(path.split("/")[:-1])
     from save.actionhdfs import delete_path
-    #delete_path(path[5:])
+    delete_path(path[5:])
+    logging.basicConfig(level = logging.INFO,format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger('path is')
+
+    logger.info(path)
+    logger.warn(path[5:])
+    os.system("hadoop fs -rm -r %s"%(path))
     delete_path(path)
     action1=""
     action1="delete  "+path
@@ -203,19 +211,29 @@ def down(request,username,path):
 @csrf_exempt
 def upload(request,username,path):
     name = request.POST.get("up")  # 用户提交的上传文件路径
-
-
     content =request.FILES.get("upload", None)
-
-
-
-
+    if not content:
+      return HttpResponse("没有上传内容")
+    position = os.path.join('/usr/hubingtest',content.name)
+    storage = open(position,'wb+')       #打开存储文件
+    for chunk in content.chunks():       #分块写入文件
+        storage.write(chunk)
+    storage.close()                      #写入完成后关闭文件
     file_path = path[5:]  # 文件在hdfs上的目录
+    name="/usr/hubingtest/"+content.name
     from save.actionhdfs import upload_file
     upload_file(file_path,name)       #创建文件夹
     action1=""
     action1="upload  "+file_path+name
     Useraction.objects.create(username= username,action=action1)
+    #return HttpResponse("上传成功")      #返回客户端信息
+
+    # file_path = path[5:]  # 文件在hdfs上的目录
+    # from save.actionhdfs import upload_file
+    # upload_file(file_path,name)       #创建文件夹
+    # action1=""
+    # action1="upload  "+file_path+name
+    # Useraction.objects.create(username= username,action=action1)
     return file(request,username, path)
 
  # def read(request,username,path):

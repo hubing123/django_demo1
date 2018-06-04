@@ -8,16 +8,24 @@ from django.contrib import admin
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
-    created_time=models.DateField(auto_now_add=True)
+    level=models.IntegerField(default=1)
+    created_time=models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.username
 
+class Userlogin(models.Model):
+   username=models.CharField(max_length=50)
+   logintime=models.DateTimeField(auto_now=True)
+
 
 class Useradmin(admin.ModelAdmin):
-    list_display = ('username','password','created_time')
+    list_display = ('username','password','created_time',"level")
 
-# class Userlogin(admin.ModelAdmin):
-#     list_display = ('username','login_time')
+
+class loginadmin(admin.ModelAdmin):
+  list_display = ('username','logintime')
+
 
 admin.site.register(User,Useradmin)
+admin.site.register(Userlogin,loginadmin)

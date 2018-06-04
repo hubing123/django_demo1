@@ -3,14 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title></title>
+    <title>国家海洋信息中心管理系统</title>
 </head>
-
+<style>
+    body{
+        color: rgb(238, 255, 221);
+        background: #333955 none repeat scroll 0% 0%;
+        background:#555B7A none repeat scroll 0% 0%;
+        padding: 0px 5em;
+        margin: 0px;
+    }
+</style>
 <body>
-<h1>   欢迎使用家海洋信息息中心数据管理系统</h1>
-<h3>welcome {{username}} !</h3>
+<h1 style="text-align:center">   欢迎使用家海洋信息息中心数据管理系统</h1>
+<h3 style="text-align:right">welcome {{username}} {{ level }}!</h3>
 <br>
-<a href="http://127.0.0.1:8000/online/login/">注销</a>
+
+<a href="http://202.199.10.22:50070/" target="_blank">hadoop原生系统</a>
+<p> </p>
+<a href="http://202.199.10.22:8080" target="_blank">spark原生系统</a>
+<p> </p>
+<a href="http://202.199.10.22:8000/save/hdfsfile/{{ username }}">HDFS文件管理系统</a>
+<p> </p>
+<a href="/online/login/">注销</a>
+<p> </p>
 </body>
 </html>
 

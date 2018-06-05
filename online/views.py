@@ -19,9 +19,11 @@ class UserFormLogin(forms.Form):
 
 class UserForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=100)
-    password1 = forms.CharField(label='密码',widget=forms.PasswordInput())
+    password1 = forms.CharField(label=' 密码',widget=forms.PasswordInput())
     password2 = forms.CharField(label='确认密码',widget=forms.PasswordInput())
     email = forms.EmailField(label='电子邮件')
+    employer=forms.CharField(label='工作单位')
+    tel=forms.CharField(label='联系方式')
 
 
 #注册
@@ -33,7 +35,7 @@ def regist(req):
             username = uf.cleaned_data['username']
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
-            email = forms.EmailField(label='邮箱')
+            email = uf.cleaned_data['email']
 
             #添加到数据库
             if password1==password2:
